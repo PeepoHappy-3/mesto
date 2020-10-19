@@ -1,1 +1,24 @@
-.profile {}
+.profile {
+    display: flex;
+    justify-content: flex-start;
+    padding: 40px 0 50px;
+}
+
+@media screen and (max-width:700px) {
+    .profile {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .profile {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .profile__btn_add {
+        padding: 0 19px;
+    }
+}

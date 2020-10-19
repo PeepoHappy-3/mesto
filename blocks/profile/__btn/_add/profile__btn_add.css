@@ -1,1 +1,23 @@
-.profile__btn_add {}
+.profile__btn_add {
+    background-image: url(../../../../images/add.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    align-self: center;
+    min-width: 150px;
+    min-height: 50px;
+    box-sizing: border-box;
+    margin-left: auto;
+}
+
+@media screen and (max-width:700px) {
+    .profile__btn_add {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .profile__btn_add {
+        width: 100%;
+        margin: 36px 0 0;
+    }
+}
