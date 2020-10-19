@@ -1,1 +1,6 @@
-.cards__item {}
+.cards__item {
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    max-height: 361px;
+}

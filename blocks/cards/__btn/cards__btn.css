@@ -1,1 +1,15 @@
-.cards__btn {}
+.cards__btn {
+    border: none;
+    background-color: inherit;
+    background-image: url(../../../images/like.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 18px;
+    align-self: center;
+    cursor: pointer;
+}
+
+.cards__btn :hover {
+    opacity: 0.5;
+}
