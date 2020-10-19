@@ -1,8 +1,6 @@
 .cards__body {
     display: flex;
     justify-content: space-between;
-    background-color: #ffffff;
     color: #000000;
     padding: 25px 15px 31px 21px;
-    overflow: hidden;
 }
