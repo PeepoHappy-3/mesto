@@ -14,6 +14,7 @@ editButton.addEventListener('click', function() {
         popupJob.value = profileJob.innerText;
     }
 });
+
 closeButton.addEventListener('click', closePopup);
 
 popupForm.addEventListener('submit', function(e) {
