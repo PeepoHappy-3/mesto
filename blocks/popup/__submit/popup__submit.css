@@ -5,6 +5,7 @@
     color: #ffffff;
     padding: 13px 124px 18px;
     cursor: pointer;
+    margin: 19px 0 0;
 }
 
 .popup__submit:hover {
