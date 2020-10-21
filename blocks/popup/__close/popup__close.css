@@ -1,4 +1,6 @@
 .popup__close {
+    background: none;
+    border: none;
     background-image: url(../../../images/close.svg);
     background-size: cover;
     width: 40px;
@@ -10,7 +12,7 @@
 }
 
 .popup__close:hover {
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 @media screen and (max-width:500px) {

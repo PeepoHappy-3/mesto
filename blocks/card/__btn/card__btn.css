@@ -8,8 +8,9 @@
     height: 18px;
     align-self: center;
     cursor: pointer;
+    outline-style: none;
 }
 
-.card__btn :hover {
-    opacity: 0.5;
+.card__btn:hover {
+    opacity: 0.6;
 }
