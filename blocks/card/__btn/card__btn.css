@@ -1,4 +1,4 @@
-.cards__btn {
+.card__btn {
     border: none;
     background-color: inherit;
     background-image: url(../../../images/like.svg);
@@ -10,6 +10,6 @@
     cursor: pointer;
 }
 
-.cards__btn :hover {
+.card__btn :hover {
     opacity: 0.5;
 }
