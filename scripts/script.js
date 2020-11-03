@@ -39,6 +39,9 @@ const gallery = document.querySelector('.cards-gallery');
 const closeButtons = document.querySelectorAll('.popup__close');
 const cardTemplate = document.querySelector('#card').content;
 
+const popupCard = document.querySelector('.popup_type_image');
+const popupImage = popupCard.querySelector('.popup__image');
+const popupCaption = popupCard.querySelector('.popup__caption');
 
 function createCard(card) {
     const cardElement = cardTemplate.cloneNode(true);
@@ -46,12 +49,20 @@ function createCard(card) {
     cardElement.querySelector('.card__image').src = card.link;
     const likeBtn = cardElement.querySelector('.card__btn');
     const deleteBtn = cardElement.querySelector('.card__delete');
+    const cardImage = cardElement.querySelector('.card__image');
+
     likeBtn.addEventListener('click', function(evt) {
         evt.target.classList.toggle('card__btn_active');
     });
     deleteBtn.addEventListener('click', function(evt) {
         const deleteItem = evt.target.closest('.card');
         deleteItem.remove();
+    });
+    cardImage.addEventListener('click', function(evt) {
+        openPopup(popupCard);
+        popupImage.src = evt.target.src;
+        popupCaption.innerText = evt.target.closest('.card').querySelector('.card__heading').innerText;
+        console.log(evt.target.closest('.card').querySelector('.card__heading'));
     });
     gallery.append(cardElement);
 }
