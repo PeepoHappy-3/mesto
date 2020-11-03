@@ -63,7 +63,7 @@ function createCard(card) {
         popupCaption.innerText = evt.target.closest('.card').querySelector('.card__heading').innerText;
         console.log(evt.target.closest('.card').querySelector('.card__heading'));
     });
-    gallery.append(cardElement);
+    gallery.prepend(cardElement);
 }
 
 function initCards(cards) {
