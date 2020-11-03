@@ -33,14 +33,19 @@ const popupName = popupProfile.querySelector('.popup__input_type_title');
 const popupJob = popupProfile.querySelector('.popup__input_type_subtitle');
 const popupPlace = popupAdd.querySelector('.popup__input_type_place');
 const popupLink = popupAdd.querySelector('.popup__input_type_link');
+const popupFormAdd = popupAdd.querySelector('.popup__form');
+const popupFormProfile = popupProfile.querySelector('.popup__form');
 const gallery = document.querySelector('.cards-gallery');
+const closeButtons = document.querySelectorAll('.popup__close');
 const cardTemplate = document.querySelector('#card').content;
+
 
 function renderCard(card) {
     const cardElement = cardTemplate.cloneNode(true);
     cardElement.querySelector('.card__heading').textContent = card.name;
     cardElement.querySelector('.card__image').src = card.link;
     gallery.append(cardElement);
+    console.log('append card');
 }
 
 function initCards(cards) {
@@ -76,28 +81,25 @@ function closePopup(popup) {
     popup.classList.remove('popup_opened');
 }
 
-editButton.addEventListener('click', function() {
-    const closeButton = popupProfile.querySelector('.popup__close');
-    openPopup(popupProfile);
-    closeButton.addEventListener('click', function() {
-        closePopup(popupProfile);
-    });
-    const popupForm = popupProfile.querySelector('.popup__form');
-    popupForm.addEventListener('submit', function(evt) {
-        popupSubmitProfile(evt);
-        closePopup(popupProfile);
+
+closeButtons.forEach(function(item) {
+    item.addEventListener('click', function(evt) {
+        closePopup(evt.target.closest('.popup'));
     });
 });
+
+editButton.addEventListener('click', function() {
+    openPopup(popupProfile);
+});
 addButton.addEventListener('click', function() {
-    const closeButton = popupAdd.querySelector('.popup__close');
     openPopup(popupAdd);
-    closeButton.addEventListener('click', function() {
-        closePopup(popupAdd);
-    });
-    const popupForm = popupAdd.querySelector('.popup__form');
-    popupForm.addEventListener('submit', function(evt) {
-        popupSubmitAdd(evt);
-        closePopup(popupAdd);
-    });
+});
+popupFormProfile.addEventListener('submit', function(evt) {
+    popupSubmitProfile(evt);
+    closePopup(evt.target.closest('.popup'));
+});
+popupFormAdd.addEventListener('submit', function(evt) {
+    popupSubmitAdd(evt);
+    closePopup(evt.target.closest('.popup'));
 });
 initCards(initialCards);
