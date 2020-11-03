@@ -44,9 +44,14 @@ function createCard(card) {
     const cardElement = cardTemplate.cloneNode(true);
     cardElement.querySelector('.card__heading').textContent = card.name;
     cardElement.querySelector('.card__image').src = card.link;
-    const like = cardElement.querySelector('.card__btn');
-    like.addEventListener('click', function(evt) {
+    const likeBtn = cardElement.querySelector('.card__btn');
+    const deleteBtn = cardElement.querySelector('.card__delete');
+    likeBtn.addEventListener('click', function(evt) {
         evt.target.classList.toggle('card__btn_active');
+    });
+    deleteBtn.addEventListener('click', function(evt) {
+        const deleteItem = evt.target.closest('.card');
+        deleteItem.remove();
     });
     gallery.append(cardElement);
 }
