@@ -3,9 +3,12 @@
     border: none;
     border-radius: 2px;
     color: #ffffff;
-    padding: 13px 124px 18px;
+    padding: 13px 0 18px;
     cursor: pointer;
     margin: 19px 0 0;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
 }
 
 .popup__submit:hover {
@@ -14,6 +17,6 @@
 
 @media screen and (max-width:500px) {
     .popup__submit {
-        padding: 14px 82px;
+        padding: 14px 0;
     }
 }

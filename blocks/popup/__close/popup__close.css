@@ -18,7 +18,7 @@
 
 @media screen and (max-width:500px) {
     .popup__close {
-        top: -43px;
-        right: 0;
+        top: -32px;
+        right: -32px;
     }
 }
