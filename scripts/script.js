@@ -40,17 +40,20 @@ const closeButtons = document.querySelectorAll('.popup__close');
 const cardTemplate = document.querySelector('#card').content;
 
 
-function renderCard(card) {
+function createCard(card) {
     const cardElement = cardTemplate.cloneNode(true);
     cardElement.querySelector('.card__heading').textContent = card.name;
     cardElement.querySelector('.card__image').src = card.link;
+    const like = cardElement.querySelector('.card__btn');
+    like.addEventListener('click', function(evt) {
+        evt.target.classList.toggle('card__btn_active');
+    });
     gallery.append(cardElement);
-    console.log('append card');
 }
 
 function initCards(cards) {
     cards.forEach(function(item) {
-        renderCard(item);
+        createCard(item);
     });
 }
 
@@ -75,7 +78,7 @@ function popupSubmitAdd(evt) {
     evt.preventDefault();
     const name = popupPlace.value;
     const link = popupLink.value;
-    renderCard({ name, link });
+    createCard({ name, link });
     closePopup(evt.target.closest('.popup'));
 }
 
