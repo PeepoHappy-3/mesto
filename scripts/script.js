@@ -50,7 +50,6 @@ function createCard(card) {
     const likeBtn = cardElement.querySelector('.card__btn');
     const deleteBtn = cardElement.querySelector('.card__delete');
     const cardImage = cardElement.querySelector('.card__image');
-
     likeBtn.addEventListener('click', function(evt) {
         evt.target.classList.toggle('card__btn_active');
     });
@@ -64,7 +63,7 @@ function createCard(card) {
         popupCaption.innerText = evt.target.closest('.card').querySelector('.card__heading').innerText;
         console.log(evt.target.closest('.card').querySelector('.card__heading'));
     });
-    gallery.append(cardElement);
+    gallery.prepend(cardElement);
 }
 
 function initCards(cards) {
@@ -75,14 +74,13 @@ function initCards(cards) {
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-
     if (popup.classList.contains('popup_type_profile')) {
         popupName.value = profileName.innerText;
         popupJob.value = profileJob.innerText;
     }
 }
 
-function popupSubmitProfile(evt) {
+function submitProfile(evt) {
     evt.preventDefault();
     profileName.innerText = popupName.value;
     profileJob.innerText = popupJob.value;
@@ -90,7 +88,7 @@ function popupSubmitProfile(evt) {
 
 }
 
-function popupSubmitAdd(evt) {
+function submitAddCard(evt) {
     evt.preventDefault();
     const name = popupPlace.value;
     const link = popupLink.value;
@@ -102,10 +100,7 @@ function popupSubmitAdd(evt) {
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
-
 }
-
-
 closeButtons.forEach(function(item) {
     item.addEventListener('click', function(evt) {
         closePopup(evt.target.closest('.popup'));
@@ -119,11 +114,11 @@ addButton.addEventListener('click', function() {
     openPopup(popupAdd);
 });
 popupFormProfile.addEventListener('submit', function(evt) {
-    popupSubmitProfile(evt);
+    submitProfile(evt);
 
 });
 popupFormAdd.addEventListener('submit', function(evt) {
-    popupSubmitAdd(evt);
+    submitAddCard(evt);
 
 });
 initCards(initialCards);
