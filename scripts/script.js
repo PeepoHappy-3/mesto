@@ -62,7 +62,6 @@ function initCards(cards) {
     });
 }
 
-
 function openPopup(popup) {
     popup.classList.add('popup_opened');
     if (popup.classList.contains('popup_type_profile')) {
@@ -84,6 +83,8 @@ function popupSubmitAdd(evt) {
     const name = popupPlace.value;
     const link = popupLink.value;
     createCard({ name, link });
+    popupPlace.value = '';
+    popupLink.value = '';
     closePopup(evt.target.closest('.popup'));
 }
 
