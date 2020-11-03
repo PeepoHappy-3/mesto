@@ -63,18 +63,20 @@ function openPopup(popup) {
     }
 }
 
-function popupSubmitProfile(e) {
-    e.preventDefault();
+function popupSubmitProfile(evt) {
+    evt.preventDefault();
     profileName.innerText = popupName.value;
     profileJob.innerText = popupJob.value;
+    closePopup(evt.target.closest('.popup'));
 
 }
 
-function popupSubmitAdd(e) {
-    e.preventDefault();
+function popupSubmitAdd(evt) {
+    evt.preventDefault();
     const name = popupPlace.value;
     const link = popupLink.value;
     renderCard({ name, link });
+    closePopup(evt.target.closest('.popup'));
 }
 
 function closePopup(popup) {
@@ -96,10 +98,10 @@ addButton.addEventListener('click', function() {
 });
 popupFormProfile.addEventListener('submit', function(evt) {
     popupSubmitProfile(evt);
-    closePopup(evt.target.closest('.popup'));
+
 });
 popupFormAdd.addEventListener('submit', function(evt) {
     popupSubmitAdd(evt);
-    closePopup(evt.target.closest('.popup'));
+
 });
 initCards(initialCards);
