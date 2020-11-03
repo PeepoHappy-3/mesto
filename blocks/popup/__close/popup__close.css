@@ -9,6 +9,7 @@
     top: -30px;
     right: -30px;
     cursor: pointer;
+    outline-style: none;
 }
 
 .popup__close:hover {

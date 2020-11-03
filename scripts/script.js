@@ -75,6 +75,7 @@ function initCards(cards) {
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+
     if (popup.classList.contains('popup_type_profile')) {
         popupName.value = profileName.innerText;
         popupJob.value = profileJob.innerText;
@@ -101,6 +102,7 @@ function popupSubmitAdd(evt) {
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+
 }
 
 
