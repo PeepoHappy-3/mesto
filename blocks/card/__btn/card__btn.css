@@ -10,6 +10,7 @@
     align-self: center;
     cursor: pointer;
     outline-style: none;
+    transition: opacity .2s ease-in;
 }
 
 .card__btn:hover {

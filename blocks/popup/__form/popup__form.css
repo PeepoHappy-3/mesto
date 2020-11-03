@@ -1,1 +1,5 @@
-.popup__form {}
+.popup__form {
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 10px;
+}
