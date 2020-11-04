@@ -61,7 +61,6 @@ function createCard(card) {
         openPopup(popupCard);
         popupImage.src = evt.target.src;
         popupCaption.innerText = evt.target.closest('.card').querySelector('.card__heading').innerText;
-        console.log(evt.target.closest('.card').querySelector('.card__heading'));
     });
     gallery.prepend(cardElement);
 }
