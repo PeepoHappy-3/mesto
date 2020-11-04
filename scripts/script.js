@@ -74,10 +74,13 @@ function initCards(cards) {
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    if (popup.classList.contains('popup_type_profile')) {
-        popupName.value = profileName.innerText;
-        popupJob.value = profileJob.innerText;
-    }
+
+}
+
+function popupOpenProfile(popup) {
+    openPopup(popup);
+    popupName.value = profileName.innerText;
+    popupJob.value = profileJob.innerText;
 }
 
 function submitProfile(evt) {
@@ -108,7 +111,7 @@ closeButtons.forEach(function(item) {
 });
 
 editButton.addEventListener('click', function() {
-    openPopup(popupProfile);
+    popupOpenProfile(popupProfile);
 });
 addButton.addEventListener('click', function() {
     openPopup(popupAdd);
