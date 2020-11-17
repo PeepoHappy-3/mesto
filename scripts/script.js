@@ -92,6 +92,7 @@ editButton.addEventListener('click', function() {
 addButton.addEventListener('click', function() {
     popupPlace.value = '';
     popupLink.value = '';
+
     openPopup(popupAdd);
 });
 popupFormProfile.addEventListener('submit', function(evt) {
