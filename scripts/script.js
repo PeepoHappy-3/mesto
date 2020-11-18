@@ -66,7 +66,6 @@ function submitProfile(evt) {
     profileName.innerText = popupName.value;
     profileJob.innerText = popupJob.value;
     closePopup(evt.target.closest('.popup'));
-
 }
 
 function submitAddCard(evt) {
@@ -79,6 +78,7 @@ function submitAddCard(evt) {
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    resetValidation(popup.querySelector('.popup__form'), validationSettings);
 }
 closeButtons.forEach(function(item) {
     item.addEventListener('click', function(evt) {
@@ -92,7 +92,6 @@ editButton.addEventListener('click', function() {
 addButton.addEventListener('click', function() {
     popupPlace.value = '';
     popupLink.value = '';
-
     openPopup(popupAdd);
 });
 popupFormProfile.addEventListener('submit', function(evt) {
