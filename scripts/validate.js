@@ -82,7 +82,7 @@ function resetValidation(formElement, {
             inputElement.classList.remove(inputErrorClass);
         }
         if (errorElement.classList.contains(errorClass)) {
-            errorElement.classList.remove(errorClass)
+            errorElement.classList.remove(errorClass);
         }
         buttonElement.setAttribute('disabled', true);
     });
