@@ -35,7 +35,6 @@ function createCard(card) {
     });
     cardImage.addEventListener('click', function(evt) {
         openPopup(popupCard);
-
         popupImage.src = evt.target.src;
         popupCaption.innerText = evt.target.closest('.card').querySelector('.card__heading').innerText;
     });
