@@ -53,6 +53,7 @@ function initCards(cards) {
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    resetValidation(popup.querySelector('.popup__form'), validationSettings);
 }
 
 function popupOpenProfile(popup) {
@@ -78,7 +79,6 @@ function submitAddCard(evt) {
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
-    resetValidation(popup.querySelector('.popup__form'), validationSettings);
 }
 closeButtons.forEach(function(item) {
     item.addEventListener('click', function(evt) {
