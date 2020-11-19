@@ -67,24 +67,21 @@ function hideError(errorElement, inputElement, errorClass, inputErrorClass) {
 }
 
 function resetValidation(formElement, {
-    formSelector,
     inputSelector,
     submitButtonSelector,
     inputErrorClass,
     errorClass
 }) {
-    //const formElement = document.querySelector(formSelector);
-    const inputList = Array.from(formElement.querySelectorAll(inputSelector));
-    const buttonElement = formElement.querySelector(submitButtonSelector);
-    inputList.forEach((inputElement) => {
-        const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-        if (inputElement.classList.contains(inputErrorClass)) {
+    if (formElement) {
+        const inputList = Array.from(formElement.querySelectorAll(inputSelector));
+        const buttonElement = formElement.querySelector(submitButtonSelector);
+        inputList.forEach((inputElement) => {
+            const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
             inputElement.classList.remove(inputErrorClass);
-        }
-        if (errorElement.classList.contains(errorClass)) {
             errorElement.classList.remove(errorClass);
-        }
-        buttonElement.setAttribute('disabled', true);
-    });
+            buttonElement.setAttribute('disabled', true);
+        });
+    }
+
 }
 enableValidation(validationSettings);
