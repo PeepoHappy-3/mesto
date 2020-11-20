@@ -60,7 +60,6 @@ function openPopup(popup) {
 
 function popupOpenProfile(popup) {
     openPopup(popup);
-
     popupName.value = profileName.innerText;
     popupJob.value = profileJob.innerText;
 }
