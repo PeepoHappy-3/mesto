@@ -9,6 +9,13 @@
     margin-left: auto;
 }
 
+@media screen and (max-width:768px) {
+    .profile__btn_add {
+        align-self: center;
+        margin: 0;
+    }
+}
+
 @media screen and (max-width:700px) {
     .profile__btn_add {
         margin-left: auto;
