@@ -1,3 +1,6 @@
+//const { Card } = require("./Card");
+import { Card } from './Card.js';
+
 const popupProfile = document.querySelector('.popup.popup_type_profile');
 const popupAdd = document.querySelector('.popup.popup_type_add-card');
 const editButton = document.querySelector('.profile__btn_edit');
@@ -12,34 +15,18 @@ const popupFormAdd = popupAdd.querySelector('.popup__form');
 const popupFormProfile = popupProfile.querySelector('.popup__form');
 const gallery = document.querySelector('.cards-gallery');
 const closeButtons = document.querySelectorAll('.popup__close');
-const cardTemplate = document.querySelector('#card').content;
+
 
 const popupCard = document.querySelector('.popup_type_image');
 const popupImage = popupCard.querySelector('.popup__image');
 const popupCaption = popupCard.querySelector('.popup__caption');
 
-function createCard(card) {
-    const cardElement = cardTemplate.cloneNode(true);
-    const cardImage = cardElement.querySelector('.card__image');
-    cardElement.querySelector('.card__heading').textContent = card.name;
-    cardImage.src = card.link;
-    cardImage.setAttribute('alt', card.name);
-    const likeBtn = cardElement.querySelector('.card__btn');
-    const deleteBtn = cardElement.querySelector('.card__delete');
-    likeBtn.addEventListener('click', function(evt) {
-        evt.target.classList.toggle('card__btn_active');
-    });
-    deleteBtn.addEventListener('click', function(evt) {
-        const deleteItem = evt.target.closest('.card');
-        deleteItem.remove();
-    });
-    cardImage.addEventListener('click', function(evt) {
-        openPopup(popupCard);
-        popupImage.src = evt.target.src;
-        popupImage.alt = evt.target.closest('.card').querySelector('.card__heading').innerText;
-        popupCaption.innerText = evt.target.closest('.card').querySelector('.card__heading').innerText;
-    });
-    return cardElement;
+
+function openImagePopup(evt) {
+    openPopup(popupCard);
+    popupImage.src = evt.target.src;
+    popupImage.alt = evt.target.closest('.card').querySelector('.card__heading').innerText;
+    popupCaption.innerText = evt.target.closest('.card').querySelector('.card__heading').innerText;
 }
 
 function addCard(card, cardContainer) {
@@ -48,7 +35,8 @@ function addCard(card, cardContainer) {
 
 function initCards(cards) {
     cards.forEach(function(item) {
-        addCard(createCard(item), gallery);
+        const card = new Card(item, '#card', openImagePopup);
+        addCard(card.generateCard(), gallery);
     });
 }
 
