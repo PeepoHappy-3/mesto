@@ -1,4 +1,3 @@
-//const { Card } = require("./Card");
 import { Card } from './Card.js';
 
 const popupProfile = document.querySelector('.popup.popup_type_profile');
@@ -61,8 +60,6 @@ function submitProfile(evt) {
 
 function submitAddCard(evt) {
     evt.preventDefault();
-    const name = popupPlace.value;
-    const link = popupLink.value;
     const cardConf = {
         name: popupPlace.value,
         link: popupLink.value
