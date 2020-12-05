@@ -63,7 +63,12 @@ function submitAddCard(evt) {
     evt.preventDefault();
     const name = popupPlace.value;
     const link = popupLink.value;
-    addCard(createCard({ name, link }), gallery);
+    const cardConf = {
+        name: popupPlace.value,
+        link: popupLink.value
+    };
+    const card = new Card(cardConf, '#card', openImagePopup);
+    addCard(card.generateCard(), gallery);
     closePopup(popupAdd);
 }
 
