@@ -1,4 +1,13 @@
 import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
+const validationSettings = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+}
 
 const popupProfile = document.querySelector('.popup.popup_type_profile');
 const popupAdd = document.querySelector('.popup.popup_type_add-card');
@@ -113,13 +122,17 @@ closeButtons.forEach(function(item) {
 
 editButton.addEventListener('click', function(evt) {
     popupOpenProfile(popupProfile);
-    resetValidation(popupProfile.querySelector('.popup__form'), validationSettings);
+    const form = new FormValidator(validationSettings, popupProfile.querySelector('.popup__form'));
+    form.enableValidation();
+    form.resetValidation();
 });
 addButton.addEventListener('click', function() {
     popupPlace.value = '';
     popupLink.value = '';
     openPopup(popupAdd);
-    resetValidation(popupAdd.querySelector('.popup__form'), validationSettings);
+    const form = new FormValidator(validationSettings, popupAdd.querySelector('.popup__form'));
+    form.enableValidation();
+    form.resetValidation();
 });
 popupFormProfile.addEventListener('submit', function(evt) {
     submitProfile(evt);
