@@ -1,3 +1,14 @@
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
+const validationSettings = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+}
+
 const popupProfile = document.querySelector('.popup.popup_type_profile');
 const popupAdd = document.querySelector('.popup.popup_type_add-card');
 const editButton = document.querySelector('.profile__btn_edit');
@@ -12,34 +23,18 @@ const popupFormAdd = popupAdd.querySelector('.popup__form');
 const popupFormProfile = popupProfile.querySelector('.popup__form');
 const gallery = document.querySelector('.cards-gallery');
 const closeButtons = document.querySelectorAll('.popup__close');
-const cardTemplate = document.querySelector('#card').content;
+
 
 const popupCard = document.querySelector('.popup_type_image');
 const popupImage = popupCard.querySelector('.popup__image');
 const popupCaption = popupCard.querySelector('.popup__caption');
 
-function createCard(card) {
-    const cardElement = cardTemplate.cloneNode(true);
-    const cardImage = cardElement.querySelector('.card__image');
-    cardElement.querySelector('.card__heading').textContent = card.name;
-    cardImage.src = card.link;
-    cardImage.setAttribute('alt', card.name);
-    const likeBtn = cardElement.querySelector('.card__btn');
-    const deleteBtn = cardElement.querySelector('.card__delete');
-    likeBtn.addEventListener('click', function(evt) {
-        evt.target.classList.toggle('card__btn_active');
-    });
-    deleteBtn.addEventListener('click', function(evt) {
-        const deleteItem = evt.target.closest('.card');
-        deleteItem.remove();
-    });
-    cardImage.addEventListener('click', function(evt) {
-        openPopup(popupCard);
-        popupImage.src = evt.target.src;
-        popupImage.alt = evt.target.closest('.card').querySelector('.card__heading').innerText;
-        popupCaption.innerText = evt.target.closest('.card').querySelector('.card__heading').innerText;
-    });
-    return cardElement;
+
+function openImagePopup(evt) {
+    openPopup(popupCard);
+    popupImage.src = evt.target.src;
+    popupImage.alt = evt.target.closest('.card').querySelector('.card__heading').innerText;
+    popupCaption.innerText = evt.target.closest('.card').querySelector('.card__heading').innerText;
 }
 
 function addCard(card, cardContainer) {
@@ -48,7 +43,8 @@ function addCard(card, cardContainer) {
 
 function initCards(cards) {
     cards.forEach(function(item) {
-        addCard(createCard(item), gallery);
+        const card = new Card(item, '#card', openImagePopup);
+        addCard(card.generateCard(), gallery);
     });
 }
 
@@ -73,9 +69,12 @@ function submitProfile(evt) {
 
 function submitAddCard(evt) {
     evt.preventDefault();
-    const name = popupPlace.value;
-    const link = popupLink.value;
-    addCard(createCard({ name, link }), gallery);
+    const cardConf = {
+        name: popupPlace.value,
+        link: popupLink.value
+    };
+    const card = new Card(cardConf, '#card', openImagePopup);
+    addCard(card.generateCard(), gallery);
     closePopup(popupAdd);
 }
 
@@ -123,13 +122,17 @@ closeButtons.forEach(function(item) {
 
 editButton.addEventListener('click', function(evt) {
     popupOpenProfile(popupProfile);
-    resetValidation(popupProfile.querySelector('.popup__form'), validationSettings);
+    const form = new FormValidator(validationSettings, popupProfile.querySelector('.popup__form'));
+    form.enableValidation();
+    form.resetValidation();
 });
 addButton.addEventListener('click', function() {
     popupPlace.value = '';
     popupLink.value = '';
     openPopup(popupAdd);
-    resetValidation(popupAdd.querySelector('.popup__form'), validationSettings);
+    const form = new FormValidator(validationSettings, popupAdd.querySelector('.popup__form'));
+    form.enableValidation();
+    form.resetValidation();
 });
 popupFormProfile.addEventListener('submit', function(evt) {
     submitProfile(evt);
