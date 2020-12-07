@@ -1,5 +1,6 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
+import { initialCards } from './initialCards.js'
 
 const validationSettings = {
     formSelector: '.popup__form',
@@ -50,8 +51,8 @@ function initCards(cards) {
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    addEscListener();
-    addOverlayListener(popup);
+    document.addEventListener('keyup', closeOnEsc);
+    popup.addEventListener('click', closeOnOverlay);
 }
 
 function popupOpenProfile(popup) {
@@ -80,16 +81,8 @@ function submitAddCard(evt) {
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
-    removeEscListener();
-    removeOverlayListener(popup);
-}
-
-function addEscListener() {
-    document.addEventListener('keyup', closeOnEsc);
-}
-
-function removeEscListener() {
     document.removeEventListener('keyup', closeOnEsc);
+    popup.removeEventListener('click', closeOnOverlay);
 }
 
 function closeOnEsc(evt) {
@@ -106,14 +99,6 @@ function closeOnOverlay(evt) {
     }
 }
 
-function addOverlayListener(popup) {
-    popup.addEventListener('click', closeOnOverlay);
-}
-
-function removeOverlayListener(popup) {
-    popup.removeEventListener('click', closeOnOverlay);
-}
-
 closeButtons.forEach(function(item) {
     item.addEventListener('click', function(evt) {
         closePopup(evt.target.closest('.popup'));
@@ -127,8 +112,7 @@ editButton.addEventListener('click', function(evt) {
     form.resetValidation();
 });
 addButton.addEventListener('click', function() {
-    popupPlace.value = '';
-    popupLink.value = '';
+    popupAdd.querySelector('.popup__form').reset();
     openPopup(popupAdd);
     const form = new FormValidator(validationSettings, popupAdd.querySelector('.popup__form'));
     form.enableValidation();

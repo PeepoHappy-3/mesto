@@ -1,11 +1,3 @@
-const validationSettings = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
-}
-
 export class FormValidator {
     constructor(settings, form) {
         this._formSelector = settings.formSelector;
