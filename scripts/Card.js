@@ -23,9 +23,11 @@ export class Card {
     }
     generateCard() {
         this._element = this._getTemplate();
-        this._element.querySelector('.card__image').src = this._link;
-        this._element.querySelector('.card__image').setAttribute('alt', this._name);
-        this._element.querySelector('.card__heading').textContent = this._name;
+        const image = this._element.querySelector('.card__image');
+        image.src = this._link;
+        image.setAttribute('alt', this._name);
+        const heading = this._element.querySelector('.card__heading');
+        heading.textContent = this._name;
         this._setEventListeners();
         return this._element;
     }
