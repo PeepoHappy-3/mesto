@@ -1,0 +1,39 @@
+{
+    "name": "mesto",
+    "version": "1.0.0",
+    "description": "Страница с карточками различных мест.\r Сетка карточек реализована с использованием технологии Grid-layout.\r Реализованы следующие возможности:\r - редактировать иформацию профиля посредством всплывающего окна (JavaScript);\r - ставить карточкам лайки (JavaScript);\r - добавлять новые карточки в галерею (JavaScript);\r - валидация форм\r - закрытие попапа по клику на оверлэй и по нажатию клавиши Esc\r Не сохраняется при перезагрузке страницы.",
+    "main": "index.js",
+    "scripts": {
+        "build": "webpack --mode production",
+        "dev": "webpack serve"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/PeepoHappy-3/mesto.git"
+    },
+    "author": "Dmitri",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/PeepoHappy-3/mesto/issues"
+    },
+    "homepage": "https://github.com/PeepoHappy-3/mesto#readme",
+    "devDependencies": {
+        "@babel/core": "^7.12.10",
+        "@babel/preset-env": "^7.12.11",
+        "autoprefixer": "^10.1.0",
+        "babel-loader": "^8.2.2",
+        "clean-webpack-plugin": "^3.0.0",
+        "css-loader": "^5.0.1",
+        "cssnano": "^4.1.10",
+        "html-webpack-plugin": "^4.5.0",
+        "mini-css-extract-plugin": "^1.3.3",
+        "postcss-loader": "^4.1.0",
+        "webpack": "^5.11.0",
+        "webpack-cli": "^4.2.0",
+        "webpack-dev-server": "^3.11.0",
+        "webpack-server": "^0.1.2"
+    },
+    "dependencies": {
+        "core-js": "^3.8.1"
+    }
+}
