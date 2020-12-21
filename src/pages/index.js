@@ -1,6 +1,7 @@
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
-import { initialCards } from './initialCards.js'
+import './pages/index.css';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { initialCards } from '../components/initialCards.js'
 
 const validationSettings = {
     formSelector: '.popup__form',
@@ -38,7 +39,7 @@ function openImagePopup(evt) {
     popupCaption.innerText = evt.target.closest('.card').querySelector('.card__heading').innerText;
 }
 
-function addCard(card, cardContainer) {
+/*function addCard(card, cardContainer) {
     cardContainer.prepend(card);
 };
 
@@ -48,7 +49,7 @@ function initCards(cards) {
         addCard(card.generateCard(), gallery);
     });
 }
-
+*/
 function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keyup', closeOnEsc);
