@@ -29,15 +29,17 @@ const editButton = document.querySelector('.profile__btn_edit');
 const addButton = document.querySelector('.profile__btn_add');
 const gallery = document.querySelector('.cards-gallery');
 
+const popupWithImage = new PopupWithImage('.popup_type_image', popupSelectors);
+const formValidator = new FormValidator(validationSettings, document.querySelector('.popup_type_profile').querySelector('.popup__form'));
+
 const userInfo = new UserInfo({ userName: '.profile__title', userJob: '.profile__subtitle' });
 const section = new Section({
     items: initialCards,
     renderer: (item) => {
-        const card = new Card(item, '#card', (evt) => {
-            const popup = new PopupWithImage('.popup_type_image', popupSelectors);
-            popup.open(evt.target.src,
-                evt.target.closest('.card').querySelector('.card__heading').innerText);
-            popup.setEventListeners();
+        const card = new Card(item, '#card', (name, link) => {
+            popupWithImage.open(link,
+                name);
+            popupWithImage.setEventListeners();
         });
         section.addItem(card.generateCard());
     }
@@ -50,10 +52,9 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', popupSelectors, f
         name: data.popupPlace,
         link: data.popupLink
     };
-    const card = new Card(cardConf, '#card', (evt) => {
-        const popup = new PopupWithImage('.popup_type_image', popupSelectors);
-        popup.open(evt.target.src,
-            evt.target.closest('.card').querySelector('.card__heading').innerText);
+    const card = new Card(cardConf, '#card', (name, link) => {
+        popupWithImage.open(link,
+            name);
     });
     section.addItem(card.generateCard());
     popupAddCard.close();
@@ -69,14 +70,12 @@ popupEditProfile.setEventListeners();
 
 editButton.addEventListener('click', () => {
     popupEditProfile.open();
-    const form = new FormValidator(validationSettings, document.querySelector('.popup_type_profile').querySelector('.popup__form'));
-    form.enableValidation();
-    form.resetValidation();
+    formValidator.enableValidation();
+    formValidator.resetValidation();
 });
 
 addButton.addEventListener('click', () => {
     popupAddCard.open();
-    const form = new FormValidator(validationSettings, document.querySelector('.popup_type_add-card').querySelector('.popup__form'));
-    form.enableValidation();
-    form.resetValidation();
+    formValidator.enableValidation();
+    formValidator.resetValidation();
 });

@@ -3,14 +3,17 @@ export class Popup {
         this._popup = document.querySelector(selector);
         this._closeSelector = config.closeSelector;
         this._opened = config.opened;
+        this._handleEscClose = this._handleEscClose.bind(this);
+        this._handleOverlayClose = this._handleOverlayClose.bind(this);
+
     }
     open() {
         this._popup.classList.add(this._opened);
-        document.addEventListener('keyup', this._handleEscClose.bind(this));
+        document.addEventListener('keyup', this._handleEscClose);
     }
     close() {
         this._popup.classList.remove(this._opened);
-        document.removeEventListener('keyup', this._handleEscClose.bind(this));
+        document.removeEventListener('keyup', this._handleEscClose);
     }
     _handleEscClose(evt) {
         if (evt.key == 'Escape') {
@@ -23,7 +26,7 @@ export class Popup {
         }
     }
     setEventListeners() {
-        this._popup.addEventListener('click', this._handleOverlayClose.bind(this));
+        this._popup.addEventListener('click', this._handleOverlayClose);
         this._popup.querySelector(this._closeSelector).addEventListener('click', () => {
             this.close();
         });
