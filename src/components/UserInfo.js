@@ -1,18 +1,18 @@
 export class UserInfo {
     constructor(info) {
-        this._userNameSelector = info.userName;
-        this._userJobSelector = info.userJob;
+        this._userNameSelector = info.profileName;
+        this._userJobSelector = info.profileJob;
     }
     getUserInfo() {
-        const userName = document.querySelector(this._userNameSelector).textContent;
-        const userJob = document.querySelector(this._userJobSelector).textContent;
+        const userName = document.querySelector(this._userNameSelector).innerText;
+        const userJob = document.querySelector(this._userJobSelector).innerText;
         return {
-            userName: userName,
-            userJob: userJob
+            profileName: userName,
+            profileJob: userJob
         }
     }
     setUserInfo(userData) {
-        document.querySelector(this._userNameSelector).innerText = userData.popupName;
-        document.querySelector(this._userJobSelector).innerText = userData.popupJob;
+        document.querySelector(this._userNameSelector).innerText = userData.profileName;
+        document.querySelector(this._userJobSelector).innerText = userData.profileJob;
     }
 }

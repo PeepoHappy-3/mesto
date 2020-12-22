@@ -32,7 +32,7 @@ const gallery = document.querySelector('.cards-gallery');
 const popupWithImage = new PopupWithImage('.popup_type_image', popupSelectors);
 const formValidator = new FormValidator(validationSettings, document.querySelector('.popup_type_profile').querySelector('.popup__form'));
 
-const userInfo = new UserInfo({ userName: '.profile__title', userJob: '.profile__subtitle' });
+const userInfo = new UserInfo({ profileName: '.profile__title', profileJob: '.profile__subtitle' });
 const section = new Section({
     items: initialCards,
     renderer: (item) => {
@@ -49,8 +49,8 @@ section.renderItems();
 const popupAddCard = new PopupWithForm('.popup_type_add-card', popupSelectors, function(evt, data) {
     evt.preventDefault();
     const cardConf = {
-        name: data.popupPlace,
-        link: data.popupLink
+        name: data.profilePlace,
+        link: data.profileLink
     };
     const card = new Card(cardConf, '#card', (name, link) => {
         popupWithImage.open(link,
@@ -66,6 +66,7 @@ const popupEditProfile = new PopupWithForm('.popup_type_profile', popupSelectors
     userInfo.setUserInfo(userData);
     popupEditProfile.close();
 });
+popupEditProfile.setValues(userInfo.getUserInfo());
 popupEditProfile.setEventListeners();
 
 editButton.addEventListener('click', () => {
