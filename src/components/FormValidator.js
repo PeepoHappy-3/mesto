@@ -66,7 +66,7 @@ export class FormValidator {
                 const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
                 inputElement.classList.remove(this._inputErrorClass);
                 errorElement.classList.remove(this._errorClass);
-                buttonElement.setAttribute('disabled', true);
+                buttonElement.setAttribute('disabled', 'disabled');
             });
         }
 

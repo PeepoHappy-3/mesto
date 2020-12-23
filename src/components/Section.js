@@ -12,4 +12,7 @@ export class Section {
     addItem(element) {
         this._selector.prepend(element);
     }
+    pushItem(element) {
+        this._selector.append(element);
+    }
 }

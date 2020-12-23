@@ -30,7 +30,9 @@ const addButton = document.querySelector('.profile__btn_add');
 const gallery = document.querySelector('.cards-gallery');
 
 const popupWithImage = new PopupWithImage('.popup_type_image', popupSelectors);
-const formValidator = new FormValidator(validationSettings, document.querySelector('.popup_type_profile').querySelector('.popup__form'));
+
+const formProfileValidator = new FormValidator(validationSettings, document.querySelector('.popup_type_profile').querySelector('.popup__form'));
+const formAddCardValidator = new FormValidator(validationSettings, document.querySelector('.popup_type_add-card').querySelector('.popup__form'));
 
 const userInfo = new UserInfo({ profileName: '.profile__title', profileJob: '.profile__subtitle' });
 const section = new Section({
@@ -39,13 +41,13 @@ const section = new Section({
         const card = new Card(item, '#card', (name, link) => {
             popupWithImage.open(link,
                 name);
-            popupWithImage.setEventListeners();
+
         });
-        section.addItem(card.generateCard());
+        section.pushItem(card.generateCard());
     }
 }, gallery);
 section.renderItems();
-
+popupWithImage.setEventListeners();
 const popupAddCard = new PopupWithForm('.popup_type_add-card', popupSelectors, function(evt, data) {
     evt.preventDefault();
     const cardConf = {
@@ -71,12 +73,12 @@ popupEditProfile.setEventListeners();
 
 editButton.addEventListener('click', () => {
     popupEditProfile.open();
-    formValidator.enableValidation();
-    formValidator.resetValidation();
+    formProfileValidator.enableValidation();
+    formProfileValidator.resetValidation();
 });
 
 addButton.addEventListener('click', () => {
     popupAddCard.open();
-    formValidator.enableValidation();
-    formValidator.resetValidation();
+    formAddCardValidator.enableValidation();
+    formAddCardValidator.resetValidation();
 });
