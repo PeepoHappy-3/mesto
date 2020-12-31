@@ -7,6 +7,11 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js'
 
+
+
+
+
+
 const validationSettings = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
@@ -34,7 +39,17 @@ const popupWithImage = new PopupWithImage('.popup_type_image', popupSelectors);
 const formProfileValidator = new FormValidator(validationSettings, document.querySelector('.popup_type_profile').querySelector('.popup__form'));
 const formAddCardValidator = new FormValidator(validationSettings, document.querySelector('.popup_type_add-card').querySelector('.popup__form'));
 
-const userInfo = new UserInfo({ profileName: '.profile__title', profileJob: '.profile__subtitle' });
+const userInfo = new UserInfo({ name: '.profile__title', about: '.profile__subtitle', avatar: '.profile__photo' });
+fetch('https://mesto.nomoreparties.co/v1/cohort-19/users/me', {
+        headers: {
+            authorization: 'aac4a60b-b09e-40d2-9391-f119b1a59443'
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        userInfo.setUserInfo(data);
+    });
+
 const section = new Section({
     items: initialCards,
     renderer: (item) => {
@@ -68,11 +83,12 @@ const popupEditProfile = new PopupWithForm('.popup_type_profile', popupSelectors
     userInfo.setUserInfo(userData);
     popupEditProfile.close();
 });
-popupEditProfile.setValues(userInfo.getUserInfo());
+
 popupEditProfile.setEventListeners();
 
 editButton.addEventListener('click', () => {
     popupEditProfile.open();
+    popupEditProfile.setValues(userInfo.getUserInfo());
     formProfileValidator.enableValidation();
     formProfileValidator.resetValidation();
 });
