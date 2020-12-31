@@ -13,9 +13,10 @@ export class UserInfo {
         }
     }
     setUserInfo(userData) {
-        console.log(userData);
         document.querySelector(this._userNameSelector).innerText = userData.name;
         document.querySelector(this._userJobSelector).innerText = userData.about;
         document.querySelector(this._avatarSelector).src = userData.avatar;
     }
+
+
 }

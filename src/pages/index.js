@@ -9,9 +9,6 @@ import { UserInfo } from '../components/UserInfo.js'
 
 
 
-
-
-
 const validationSettings = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
@@ -29,6 +26,12 @@ const popupSelectors = {
     formSelector: '.popup__form'
 }
 
+const serverInfo = {
+    token: 'aac4a60b-b09e-40d2-9391-f119b1a59443',
+    profileLink: 'https://mesto.nomoreparties.co/v1/cohort-19/users/me'
+}
+const token = 'aac4a60b-b09e-40d2-9391-f119b1a59443';
+const profileLink = 'https://mesto.nomoreparties.co/v1/cohort-19/users/me';
 
 const editButton = document.querySelector('.profile__btn_edit');
 const addButton = document.querySelector('.profile__btn_add');
@@ -39,16 +42,22 @@ const popupWithImage = new PopupWithImage('.popup_type_image', popupSelectors);
 const formProfileValidator = new FormValidator(validationSettings, document.querySelector('.popup_type_profile').querySelector('.popup__form'));
 const formAddCardValidator = new FormValidator(validationSettings, document.querySelector('.popup_type_add-card').querySelector('.popup__form'));
 
+
+
 const userInfo = new UserInfo({ name: '.profile__title', about: '.profile__subtitle', avatar: '.profile__photo' });
-fetch('https://mesto.nomoreparties.co/v1/cohort-19/users/me', {
+fetch(profileLink, {
         headers: {
-            authorization: 'aac4a60b-b09e-40d2-9391-f119b1a59443'
+            authorization: token
         }
     })
     .then(res => res.json())
     .then(data => {
         userInfo.setUserInfo(data);
     });
+
+
+
+
 
 const section = new Section({
     items: initialCards,
@@ -80,7 +89,26 @@ popupAddCard.setEventListeners();
 
 const popupEditProfile = new PopupWithForm('.popup_type_profile', popupSelectors, (evt, userData) => {
     evt.preventDefault();
-    userInfo.setUserInfo(userData);
+    // userInfo.setUserInfo(userData);
+    fetch(profileLink, {
+        method: 'PATCH',
+        headers: {
+            authorization: token,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+            userData
+        )
+    });
+    fetch(profileLink, {
+            headers: {
+                authorization: token
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            userInfo.setUserInfo(data);
+        });
     popupEditProfile.close();
 });
 
