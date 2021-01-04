@@ -43,9 +43,7 @@ const formAddCardValidator = new FormValidator(validationSettings, document.quer
 const userInfo = new UserInfo({ profileName: '.profile__title', profileJob: '.profile__subtitle' });
 
 const api = new Api(options);
-api.getProfileInfo('users/me', (data) => {
-    userInfo.setUserInfo(data);
-})
+
 
 
 const section = new Section({
@@ -55,7 +53,8 @@ const section = new Section({
                     name);
             },
             popupWithConfirm.open.bind(popupWithConfirm),
-            api
+            api,
+            userInfo.getUserId()
         );
         section.prependItem(card.generateCard());
     }
@@ -69,7 +68,8 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', popupSelectors, f
                     name);
             },
             popupWithConfirm.open.bind(popupWithConfirm),
-            api
+            api,
+            userInfo.getUserId()
         );
         section.appendItem(card.generateCard());
     });
@@ -78,7 +78,10 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', popupSelectors, f
 
 const popupEditProfile = new PopupWithForm('.popup_type_profile', popupSelectors, (evt, userData) => {
     evt.preventDefault();
-    api.setProfileInfo('users/me', userData, (data) => { userInfo.setUserInfo(data) });
+    api.setProfileInfo('users/me',
+        userData, (data) => {
+            userInfo.setUserInfo(data)
+        });
     popupEditProfile.close();
 });
 
@@ -86,6 +89,10 @@ popupAddCard.setEventListeners();
 popupWithConfirm.setEventListeners();
 popupWithImage.setEventListeners();
 popupEditProfile.setEventListeners();
+
+api.getProfileInfo('users/me', (data) => {
+    userInfo.setUserInfo(data);
+})
 api.getInitialCards('cards', (data) => {
     section.renderItems(data);
 });

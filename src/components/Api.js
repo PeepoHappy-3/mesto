@@ -4,7 +4,7 @@ export class Api {
         this._token = options.token;
     }
     getProfileInfo(link, handler) {
-        return fetch(this._baseUrl + `${link}`, {
+        fetch(this._baseUrl + `${link}`, {
                 headers: {
                     authorization: this._token
                 }

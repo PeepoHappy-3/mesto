@@ -14,5 +14,9 @@ export class UserInfo {
     setUserInfo(userData) {
         document.querySelector(this._userNameSelector).innerText = userData.name;
         document.querySelector(this._userJobSelector).innerText = userData.about;
+        this._id = userData._id;
+    }
+    getUserId() {
+        return this._id;
     }
 }
