@@ -4,15 +4,15 @@ export class Section {
         this._renderer = data.renderer;
         this._selector = selector;
     }
-    renderItems() {
-        this._items.forEach((item) => {
+    renderItems(items) {
+        items.forEach((item) => {
             this._renderer(item);
         });
     }
-    addItem(element) {
+    appendItem(element) {
         this._selector.prepend(element);
     }
-    pushItem(element) {
+    prependItem(element) {
         this._selector.append(element);
     }
 }

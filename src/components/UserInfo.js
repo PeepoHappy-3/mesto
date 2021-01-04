@@ -7,12 +7,12 @@ export class UserInfo {
         const userName = document.querySelector(this._userNameSelector).innerText;
         const userJob = document.querySelector(this._userJobSelector).innerText;
         return {
-            profileName: userName,
-            profileJob: userJob
+            name: userName,
+            about: userJob
         }
     }
     setUserInfo(userData) {
-        document.querySelector(this._userNameSelector).innerText = userData.profileName;
-        document.querySelector(this._userJobSelector).innerText = userData.profileJob;
+        document.querySelector(this._userNameSelector).innerText = userData.name;
+        document.querySelector(this._userJobSelector).innerText = userData.about;
     }
 }
