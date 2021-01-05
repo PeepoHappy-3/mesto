@@ -13,7 +13,6 @@ export class Card {
             return a._id === id;
         });
         this._isOwner = id === this._cardOwnerId;
-        console.log(this._isOwner);
         this._toggleLike = this._toggleLike.bind(this);
     }
     _getTemplate() {

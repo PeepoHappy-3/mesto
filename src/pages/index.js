@@ -33,16 +33,22 @@ const options = {
 
 const editButton = document.querySelector('.profile__btn_edit');
 const addButton = document.querySelector('.profile__btn_add');
+const editAvatar = document.querySelector('.profile__overlay');
 const gallery = document.querySelector('.cards-gallery');
 
 const popupWithImage = new PopupWithImage('.popup_type_image', popupSelectors);
 const popupWithConfirm = new PopupWithConfirm('.popup_type_confirm', popupSelectors);
+
+
 const formProfileValidator = new FormValidator(validationSettings, document.querySelector('.popup_type_profile').querySelector('.popup__form'));
 const formAddCardValidator = new FormValidator(validationSettings, document.querySelector('.popup_type_add-card').querySelector('.popup__form'));
+const formEditAvatarValidator = new FormValidator(validationSettings, document.querySelector('.popup_type_avatar').querySelector('.popup__form'));
 
-const userInfo = new UserInfo({ profileName: '.profile__title', profileJob: '.profile__subtitle' });
+const userInfo = new UserInfo({ profileName: '.profile__title', profileJob: '.profile__subtitle', profileAvatar: '.profile__photo' });
 
 const api = new Api(options);
+
+
 
 
 
@@ -85,13 +91,24 @@ const popupEditProfile = new PopupWithForm('.popup_type_profile', popupSelectors
     popupEditProfile.close();
 });
 
+const popupWithAvatarForm = new PopupWithForm('.popup_type_avatar', popupSelectors, (evt, data) => {
+    evt.preventDefault();
+    console.log(data.avatar);
+    api.setProfileInfo('users/me/avatar', data, (data) => {
+        userInfo.setUserAvatar(data.avatar);
+    });
+    popupWithAvatarForm.close();
+});
+
 popupAddCard.setEventListeners();
 popupWithConfirm.setEventListeners();
 popupWithImage.setEventListeners();
 popupEditProfile.setEventListeners();
+popupWithAvatarForm.setEventListeners();
 
 api.getProfileInfo('users/me', (data) => {
     userInfo.setUserInfo(data);
+    userInfo.setUserAvatar(data.avatar);
 })
 api.getInitialCards('cards', (data) => {
     section.renderItems(data);
@@ -108,3 +125,9 @@ addButton.addEventListener('click', () => {
     formAddCardValidator.enableValidation();
     formAddCardValidator.resetValidation();
 });
+
+editAvatar.addEventListener('click', () => {
+    popupWithAvatarForm.open();
+    formEditAvatarValidator.enableValidation();
+    formEditAvatarValidator.resetValidation();
+})

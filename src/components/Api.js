@@ -14,7 +14,7 @@ export class Api {
                 handler(data);
             });
     }
-    setProfileInfo(link, data, setInfo) {
+    setProfileInfo(link, data, handler) {
         fetch(this._baseUrl + `${link}`, {
                 method: 'PATCH',
                 headers: {
@@ -26,7 +26,9 @@ export class Api {
                 )
             }).then(res => res.json())
             .then(data => {
-                setInfo(data)
+                handler(data)
+            }).catch((err) => {
+                console.log(err);
             });
     }
     getInitialCards(link, handler) {
