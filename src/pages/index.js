@@ -79,7 +79,7 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', popupSelectors, f
             if (isLoading) {
                 document.querySelector('.popup_opened').querySelector('.popup__submit').innerText = 'Сохранение...'
             } else {
-                document.querySelector('.popup_opened').querySelector('.popup__submit').innerText = 'Сохранить'
+                document.querySelector('.popup_opened').querySelector('.popup__submit').innerText = 'Создать'
                 popupAddCard.close();
             }
         });

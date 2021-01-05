@@ -22,7 +22,6 @@ export class Api {
             });
     }
     setProfileInfo(link, data, handler, renderLoading) {
-
         renderLoading(true);
         fetch(this._baseUrl + `${link}`, {
                 method: 'PATCH',
@@ -67,7 +66,7 @@ export class Api {
                 console.log(err);
             })
     }
-    postNewCard(link, data, addCard, renderLoading) {
+    postNewCard(link, data, handler, renderLoading) {
         renderLoading(true);
         fetch(this._baseUrl + `${link}`, {
                 method: 'POST',
@@ -85,7 +84,7 @@ export class Api {
                 return Promise.reject(res.status + ':' + res.statusText);
             })
             .then(data => {
-                addCard(data);
+                handler(data);
             }).catch(err => {
                 console.log(err);
             }).finally(() => {
