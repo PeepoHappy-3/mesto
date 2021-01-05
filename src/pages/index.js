@@ -48,10 +48,6 @@ const userInfo = new UserInfo({ profileName: '.profile__title', profileJob: '.pr
 
 const api = new Api(options);
 
-
-
-
-
 const section = new Section({
     renderer: (item) => {
         const card = new Card(item, '#card', (name, link) => {
@@ -69,17 +65,24 @@ const section = new Section({
 const popupAddCard = new PopupWithForm('.popup_type_add-card', popupSelectors, function(evt, data) {
     evt.preventDefault();
     api.postNewCard('cards', data, (data) => {
-        const card = new Card(data, '#card', (name, link) => {
-                popupWithImage.open(link,
-                    name);
-            },
-            popupWithConfirm.open.bind(popupWithConfirm),
-            api,
-            userInfo.getUserId()
-        );
-        section.appendItem(card.generateCard());
-    });
-    popupAddCard.close();
+            const card = new Card(data, '#card', (name, link) => {
+                    popupWithImage.open(link,
+                        name);
+                },
+                popupWithConfirm.open.bind(popupWithConfirm),
+                api,
+                userInfo.getUserId()
+            );
+            section.appendItem(card.generateCard());
+        },
+        (isLoading) => {
+            if (isLoading) {
+                document.querySelector('.popup_opened').querySelector('.popup__submit').innerText = 'Сохранение...'
+            } else {
+                document.querySelector('.popup_opened').querySelector('.popup__submit').innerText = 'Сохранить'
+                popupAddCard.close();
+            }
+        });
 });
 
 const popupEditProfile = new PopupWithForm('.popup_type_profile', popupSelectors, (evt, userData) => {
@@ -87,8 +90,14 @@ const popupEditProfile = new PopupWithForm('.popup_type_profile', popupSelectors
     api.setProfileInfo('users/me',
         userData, (data) => {
             userInfo.setUserInfo(data)
+        }, (isLoading) => {
+            if (isLoading) {
+                document.querySelector('.popup_opened').querySelector('.popup__submit').innerText = 'Сохранение...'
+            } else {
+                document.querySelector('.popup_opened').querySelector('.popup__submit').innerText = 'Сохранить'
+                popupEditProfile.close();
+            }
         });
-    popupEditProfile.close();
 });
 
 const popupWithAvatarForm = new PopupWithForm('.popup_type_avatar', popupSelectors, (evt, data) => {
@@ -96,8 +105,14 @@ const popupWithAvatarForm = new PopupWithForm('.popup_type_avatar', popupSelecto
     console.log(data.avatar);
     api.setProfileInfo('users/me/avatar', data, (data) => {
         userInfo.setUserAvatar(data.avatar);
+    }, (isLoading) => {
+        if (isLoading) {
+            document.querySelector('.popup_opened').querySelector('.popup__submit').innerText = 'Сохранение...'
+        } else {
+            document.querySelector('.popup_opened').querySelector('.popup__submit').innerText = 'Сохранить'
+            popupWithAvatarForm.close();
+        }
     });
-    popupWithAvatarForm.close();
 });
 
 popupAddCard.setEventListeners();

@@ -9,12 +9,21 @@ export class Api {
                     authorization: this._token
                 }
             })
-            .then(res => res.json())
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+                return Promise.reject(res.status + ':' + res.statusText);
+            })
             .then(data => {
                 handler(data);
+            }).catch(err => {
+                console.log(err);
             });
     }
-    setProfileInfo(link, data, handler) {
+    setProfileInfo(link, data, handler, renderLoading) {
+
+        renderLoading(true);
         fetch(this._baseUrl + `${link}`, {
                 method: 'PATCH',
                 headers: {
@@ -24,12 +33,20 @@ export class Api {
                 body: JSON.stringify(
                     data
                 )
-            }).then(res => res.json())
+            }).then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+                return Promise.reject(res.status + ':' + res.statusText);
+            })
             .then(data => {
                 handler(data)
             }).catch((err) => {
                 console.log(err);
+            }).finally(() => {
+                renderLoading(false);
             });
+
     }
     getInitialCards(link, handler) {
         return fetch(this._baseUrl + `${link}`, {
@@ -38,12 +55,20 @@ export class Api {
                     authorization: this._token,
                     'Content-Type': 'application/json'
                 }
-            }).then(res => res.json())
+            }).then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+                return Promise.reject(res.status + ':' + res.statusText);
+            })
             .then(data => {
                 handler(data);
+            }).catch(err => {
+                console.log(err);
             })
     }
-    postNewCard(link, data, addCard) {
+    postNewCard(link, data, addCard, renderLoading) {
+        renderLoading(true);
         fetch(this._baseUrl + `${link}`, {
                 method: 'POST',
                 headers: {
@@ -53,9 +78,18 @@ export class Api {
                 body: JSON.stringify(
                     data
                 )
-            }).then(res => res.json())
+            }).then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+                return Promise.reject(res.status + ':' + res.statusText);
+            })
             .then(data => {
                 addCard(data);
+            }).catch(err => {
+                console.log(err);
+            }).finally(() => {
+                renderLoading(false);
             })
     }
     deleteCard(id, handler) {
