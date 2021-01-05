@@ -1,14 +1,16 @@
 export class Card {
-    constructor(card, templeteSelector, openImage, openDeletePopup, api, id) {
+    constructor(card, templeteSelector, utils, id) {
         this._name = card.name;
         this._link = card.link;
         this._templateSelector = templeteSelector;
         this._likes = card.likes.length;
         this._id = card._id;
         this._cardOwnerId = card.owner._id;
-        this._openImage = openImage;
-        this._api = api;
-        this._openDeletePopup = openDeletePopup;
+        this._openImage = utils.openImage;
+        this._openDeletePopup = utils.deleteCard;
+        this._putLike = utils.putLike;
+        this._deleteLike = utils.deleteLike;
+
         this._isLiked = card.likes.some((a) => {
             return a._id === id;
         });
@@ -41,9 +43,9 @@ export class Card {
     }
     _handleLikeBtn() {
         if (!this._isLiked) {
-            this._api.putLike(this._id, this._toggleLike);
+            this._putLike(this._id, this._toggleLike);
         } else {
-            this._api.deleteLike(this._id, this._toggleLike);
+            this._deleteLike(this._id, this._toggleLike);
         }
     }
     _renderLikes() {
@@ -51,9 +53,7 @@ export class Card {
         likes.innerText = this._likes;
     }
     _handleDeleteBtn() {
-        this._openDeletePopup(() => {
-            this._api.deleteCard(this._id, this._element.remove());
-        });
+        this._openDeletePopup(this._id, () => { this._element.remove() });
     }
     generateCard() {
         this._element = this._getTemplate();
