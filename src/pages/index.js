@@ -60,7 +60,6 @@ const section = new Section({
                         popupWithConfirm.close();
                     });
                     popupWithConfirm.open();
-                    popupWithConfirm.setEventListeners();
 
                 },
                 putLike: (id, handler) => {
@@ -95,8 +94,6 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', popupSelectors, f
                             popupWithConfirm.close();
                         });
                         popupWithConfirm.open();
-                        popupWithConfirm.setEventListeners();
-
                     },
                     putLike: (id, handler) => {
                         api.putLike(id, (data) => {
@@ -153,7 +150,7 @@ const popupWithAvatarForm = new PopupWithForm('.popup_type_avatar', popupSelecto
 });
 
 popupAddCard.setEventListeners();
-
+popupWithConfirm.setEventListeners();
 popupWithImage.setEventListeners();
 popupEditProfile.setEventListeners();
 popupWithAvatarForm.setEventListeners();
