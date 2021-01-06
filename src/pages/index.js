@@ -161,10 +161,12 @@ popupWithAvatarForm.setEventListeners();
 api.getProfileInfo('users/me', (data) => {
     userInfo.setUserInfo(data);
     userInfo.setUserAvatar(data.avatar);
+}).then(() => {
+    api.getInitialCards('cards', (data) => {
+        section.renderItems(data);
+    });
 })
-api.getInitialCards('cards', (data) => {
-    section.renderItems(data);
-});
+
 editButton.addEventListener('click', () => {
     popupEditProfile.open();
     popupEditProfile.setValues(userInfo.getUserInfo());

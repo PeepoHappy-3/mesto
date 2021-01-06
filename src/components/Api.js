@@ -4,7 +4,7 @@ export class Api {
         this._token = options.token;
     }
     getProfileInfo(link, handler) {
-        fetch(this._baseUrl + `${link}`, {
+        return fetch(this._baseUrl + `${link}`, {
                 headers: {
                     authorization: this._token
                 }
@@ -23,7 +23,7 @@ export class Api {
     }
     setProfileInfo(link, data, handler, renderLoading) {
         renderLoading(true);
-        fetch(this._baseUrl + `${link}`, {
+        return fetch(this._baseUrl + `${link}`, {
                 method: 'PATCH',
                 headers: {
                     authorization: this._token,
@@ -68,7 +68,7 @@ export class Api {
     }
     postNewCard(link, data, handler, renderLoading) {
         renderLoading(true);
-        fetch(this._baseUrl + `${link}`, {
+        return fetch(this._baseUrl + `${link}`, {
                 method: 'POST',
                 headers: {
                     authorization: this._token,
@@ -110,7 +110,7 @@ export class Api {
             });
     }
     putLike(id, handler) {
-        fetch(this._baseUrl + `cards/likes` + `/${id}`, {
+        return fetch(this._baseUrl + `cards/likes` + `/${id}`, {
                 method: 'PUT',
                 headers: {
                     authorization: this._token
@@ -128,7 +128,7 @@ export class Api {
             });
     }
     deleteLike(id, handler) {
-        fetch(this._baseUrl + `cards/likes` + `/${id}`, {
+        return fetch(this._baseUrl + `cards/likes` + `/${id}`, {
                 method: 'DELETE',
                 headers: {
                     authorization: this._token
