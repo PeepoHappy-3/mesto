@@ -15,6 +15,7 @@ export class Card {
         });
         this._isCreator = id === this._creatorId;
         this._toggleLike = this._toggleLike.bind(this);
+
     }
     _getTemplate() {
         return document.querySelector(this._templateSelector)
@@ -48,14 +49,14 @@ export class Card {
         }
     }
     _renderLikes() {
-        const likes = this._element.querySelector('.card__like-count');
-        likes.innerText = this._likes;
+        this._likesCount.innerText = this._likes;
     }
     _handleDeleteBtn() {
         this._openDeletePopup(this._id, () => { this._element.remove() });
     }
     generateCard() {
         this._element = this._getTemplate();
+        this._likesCount = this._element.querySelector('.card__like-count');
         const image = this._element.querySelector('.card__image');
         image.src = this._link;
         image.setAttribute('alt', this._name);
