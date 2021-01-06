@@ -10,8 +10,8 @@
     background-position: center;
     background-size: auto;
     background-repeat: no-repeat;
-    z-index: 2;
     transition: opacity .5s ease-in;
+    z-index: 2;
 }
 
 .profile__overlay:hover {
