@@ -5,16 +5,15 @@ export class Card {
         this._templateSelector = templeteSelector;
         this._likes = card.likes.length;
         this._id = card._id;
-        this._cardOwnerId = card.owner._id;
+        this._creatorId = card.owner._id;
         this._openImage = utils.openImage;
         this._openDeletePopup = utils.deleteCard;
         this._putLike = utils.putLike;
         this._deleteLike = utils.deleteLike;
-
-        this._isLiked = card.likes.some((a) => {
-            return a._id === id;
+        this._isLiked = card.likes.some((like) => {
+            return like._id === id;
         });
-        this._isOwner = id === this._cardOwnerId;
+        this._isCreator = id === this._creatorId;
         this._toggleLike = this._toggleLike.bind(this);
     }
     _getTemplate() {
@@ -63,7 +62,7 @@ export class Card {
         const heading = this._element.querySelector('.card__heading');
         heading.textContent = this._name;
         this._renderLikes();
-        if (!this._isOwner) {
+        if (!this._isCreator) {
             this._element.querySelector('.card__delete').style.display = "none";
         }
         if (this._isLiked) {
