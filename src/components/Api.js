@@ -3,11 +3,13 @@ export class Api {
         this._baseUrl = options.baseUrl;
         this._token = options.token;
     }
+
     _getResponse(res) {
         if (res.ok)
             return res.json();
         return Promise.reject(new Error(`Ошибка: ${res.status}`))
     }
+
     getProfileInfo() {
         return fetch(`${this._baseUrl}users/me`, {
                 headers: {
@@ -18,6 +20,7 @@ export class Api {
                 return this._getResponse(res);
             })
     }
+
     setProfileInfo(data) {
         return fetch(`${this._baseUrl}users/me`, {
             method: 'PATCH',
@@ -32,6 +35,7 @@ export class Api {
             return this._getResponse(res);
         })
     }
+
     getInitialCards() {
         return fetch(`${this._baseUrl}cards`, {
             method: 'GET',
@@ -43,6 +47,7 @@ export class Api {
             return this._getResponse(res);
         })
     }
+
     postNewCard(data) {
         return fetch(`${this._baseUrl}cards`, {
             method: 'POST',
@@ -57,6 +62,7 @@ export class Api {
             return this._getResponse(res);
         })
     }
+
     deleteCard(id) {
         return fetch(`${this._baseUrl}cards/${id}`, {
             method: 'DELETE',
@@ -67,6 +73,7 @@ export class Api {
             return this._getResponse(res);
         })
     }
+
     putLike(id) {
         return fetch(`${this._baseUrl}cards/likes/${id}`, {
             method: 'PUT',
@@ -77,6 +84,7 @@ export class Api {
             return this._getResponse(res);
         })
     }
+
     deleteLike(id) {
         return fetch(`${this._baseUrl}cards/likes/${id}`, {
             method: 'DELETE',
@@ -87,6 +95,7 @@ export class Api {
             return this._getResponse(res);
         })
     }
+
     setProfileAvatar(data) {
         return fetch(`${this._baseUrl}users/me/avatar`, {
             method: 'PATCH',
@@ -100,6 +109,5 @@ export class Api {
         }).then(res => {
             return this._getResponse(res);
         })
-
     }
 }
