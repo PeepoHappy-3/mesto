@@ -56,10 +56,11 @@ const cardHandlers = {
     deleteCard: (id, remove) => {
         popupWithConfirm.setHandler((evt) => {
             evt.preventDefault();
-            api.deleteCard(id).then(remove).catch(err => {
-                console.log(err);
-            }).finally(() => {
+            api.deleteCard(id).then(() => {
+                remove();
                 popupWithConfirm.close();
+            }).catch(err => {
+                console.log(err);
             });
         });
         popupWithConfirm.open();
@@ -97,12 +98,12 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', popupSelectors, f
     evt.preventDefault();
     popupAddCard.renderLoading(true);
     api.postNewCard(data).then((res) => {
-        createNewCard(res, false)
+        createNewCard(res, false);
+        popupAddCard.close();
     }).catch(err => {
         console.log(err);
     }).finally(() => {
         popupAddCard.renderLoading(false);
-        popupAddCard.close();
     });
 })
 
@@ -113,11 +114,11 @@ const popupEditProfile = new PopupWithForm('.popup_type_profile', popupSelectors
     popupEditProfile.renderLoading(true);
     api.setProfileInfo(userData).then((data) => {
         userInfo.setUserInfo(data);
+        popupEditProfile.close();
     }).catch(err => {
         console.log(err);
     }).finally(() => {
         popupEditProfile.renderLoading(false);
-        popupEditProfile.close();
     })
 });
 
@@ -126,11 +127,11 @@ const popupWithAvatarForm = new PopupWithForm('.popup_type_avatar', popupSelecto
     popupWithAvatarForm.renderLoading(true);
     api.setProfileAvatar(data).then((data) => {
         userInfo.setUserAvatar(data.avatar);
+        popupWithAvatarForm.close();
     }).catch(err => {
         console.log(err);
     }).finally(() => {
         popupWithAvatarForm.renderLoading(false);
-        popupWithAvatarForm.close();
     });
 });
 
