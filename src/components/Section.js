@@ -9,10 +9,11 @@ export class Section {
             this._renderer(item);
         });
     }
-    appendItem(element) {
-        this._selector.prepend(element);
-    }
-    prependItem(element) {
-        this._selector.append(element);
+    addItem(element, isArray) {
+        if (isArray) {
+            this._selector.append(element);
+        } else {
+            this._selector.prepend(element);
+        }
     }
 }

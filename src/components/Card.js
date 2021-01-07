@@ -52,7 +52,10 @@ export class Card {
         this._likesCount.innerText = this._likes;
     }
     _handleDeleteBtn() {
-        this._openDeletePopup(this._id, () => { this._element.remove() });
+        this._openDeletePopup(this._id, () => {
+            this._element.remove();
+            this._element = null;
+        });
     }
     generateCard() {
         this._element = this._getTemplate();
