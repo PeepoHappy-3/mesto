@@ -26,6 +26,11 @@ const popupSelectors = {
     submitSelector: '.popup__submit'
 }
 
+const profileSelectors = {
+    profileName: '.profile__title',
+    profileJob: '.profile__subtitle',
+    profileAvatar: '.profile__photo'
+}
 const options = {
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-19/',
     token: 'aac4a60b-b09e-40d2-9391-f119b1a59443'
@@ -42,11 +47,10 @@ const popupWithConfirm = new PopupWithForm('.popup_type_confirm', popupSelectors
 const profileForm = document.querySelector('.popup_type_profile').querySelector('.popup__form');
 const addCardForm = document.querySelector('.popup_type_add-card').querySelector('.popup__form');
 const editAvatarForm = document.querySelector('.popup_type_avatar').querySelector('.popup__form');
-const formProfileValidator = new FormValidator(validationSettings, profileForm);
-const formAddCardValidator = new FormValidator(validationSettings, addCardForm);
-const formEditAvatarValidator = new FormValidator(validationSettings, editAvatarForm);
 
-const userInfo = new UserInfo({ profileName: '.profile__title', profileJob: '.profile__subtitle', profileAvatar: '.profile__photo' });
+const formValidator = new FormValidator(validationSettings);
+
+const userInfo = new UserInfo(profileSelectors);
 
 const cardHandlers = {
     openImage: (name, link) => {
@@ -141,6 +145,7 @@ popupWithImage.setEventListeners();
 popupEditProfile.setEventListeners();
 popupWithAvatarForm.setEventListeners();
 
+formValidator.enableValidation();
 
 Promise.all([
     api.getProfileInfo(), api.getInitialCards()
@@ -155,18 +160,15 @@ Promise.all([
 editButton.addEventListener('click', () => {
     popupEditProfile.open();
     popupEditProfile.setValues(userInfo.getUserInfo());
-    formProfileValidator.enableValidation();
-    formProfileValidator.resetValidation();
+    formValidator.resetValidation(profileForm);
 });
 
 addButton.addEventListener('click', () => {
     popupAddCard.open();
-    formAddCardValidator.enableValidation();
-    formAddCardValidator.resetValidation();
+    formValidator.resetValidation(addCardForm);
 });
 
 editAvatar.addEventListener('click', () => {
     popupWithAvatarForm.open();
-    formEditAvatarValidator.enableValidation();
-    formEditAvatarValidator.resetValidation();
+    formValidator.resetValidation(editAvatarForm);
 })

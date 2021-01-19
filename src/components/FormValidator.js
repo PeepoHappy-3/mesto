@@ -58,12 +58,12 @@ export class FormValidator {
             this._setEventListeners(formElement);
         });
     }
-    resetValidation() {
-        if (this._form) {
-            const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
-            const buttonElement = this._form.querySelector(this._submitButtonSelector);
+    resetValidation(form) {
+        if (form) {
+            const inputList = Array.from(form.querySelectorAll(this._inputSelector));
+            const buttonElement = form.querySelector(this._submitButtonSelector);
             inputList.forEach((inputElement) => {
-                const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
+                const errorElement = form.querySelector(`#${inputElement.id}-error`);
                 inputElement.classList.remove(this._inputErrorClass);
                 errorElement.classList.remove(this._errorClass);
                 buttonElement.setAttribute('disabled', 'disabled');
